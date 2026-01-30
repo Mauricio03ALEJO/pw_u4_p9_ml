@@ -11,25 +11,18 @@ const consultarPorId =  async(id) => {
 }
 
 const guardar =  async(body) => {
-    /*const objeto = {
-        nombre = 'Mauricio',
-        apellido = 'Lopez'
-    }*/
-    const data = axios.post('http://localhost:8081/api/matricula/v1.0/estudiantes', body).then(r=>r.data);
-    console.log(data);
-    return data;
+    const response = await axios.post('http://localhost:8081/api/matricula/v1.0/estudiantes', body);
+    return response.data;
 }
 
 const actualizar =  async(id, body) => {
-    const data = axios.put(`http://localhost:8081/api/matricula/v1.0/estudiantes/${id}`, body).then(r=>r.data);
-    console.log(data);
-    return data;
+    const response = await axios.put(`http://localhost:8081/api/matricula/v1.0/estudiantes/${id}`, body);
+    return response.data;
 }
 
 const actualizarParcial =  async(id, body) => {
-    const data = axios.patch(`http://localhost:8081/api/matricula/v1.0/estudiantes/${id}`, body).then(r=>r.data);
-    console.log(data);
-    return data;
+    const response = await axios.patch(`http://localhost:8081/api/matricula/v1.0/estudiantes/${id}`, body);
+    return response.data;
 }
 
 const borrar =  async(id) => {

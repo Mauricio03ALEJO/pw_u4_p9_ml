@@ -13,6 +13,12 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/consultarTodos">Consultar Todos</RouterLink>
+        <RouterLink to="/consultarPorID">Consultar por ID</RouterLink>
+        <RouterLink to="/guardar">Guardar Estudiante</RouterLink>
+        <RouterLink to="/actualizar">Actualizar Estudiante</RouterLink>
+        <RouterLink to="/actualizarParcial">Actualizar Parcial</RouterLink>
+        <RouterLink to="/eliminar">Eliminar Estudiante</RouterLink>
       </nav>
     </div>
   </header>
