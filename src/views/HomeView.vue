@@ -19,3 +19,7 @@ import TheWelcome from '../components/TheWelcome.vue'
     </nav>
   </main>
 </template>
+
+export default {
+  inject: ['getToken'],
+}

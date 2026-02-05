@@ -13,6 +13,7 @@
 <script>
 import { actualizarParcialFachada } from '../clients/MatriculaClient';
 export default {
+  inject: ['getToken'],
   data() {
     return {
       id: '',

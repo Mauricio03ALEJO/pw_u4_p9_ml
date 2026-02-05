@@ -16,6 +16,7 @@
 <script>
 import { guardarFachada } from '../clients/MatriculaClient';
 export default {
+  inject: ['getToken'],
   data() {
     return {
       nombre: '',

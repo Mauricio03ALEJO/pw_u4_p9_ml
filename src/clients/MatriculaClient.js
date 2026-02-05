@@ -1,44 +1,54 @@
 import axios from "axios";
 
-const URL = 'http://localhost:8081/api/matricula/v1.0/estudiantes';
+import { obtenerTokenFacade } from './AuthClient';
+const BaseUrl = 'http://localhost:8081/api/matricula/v1.0/estudiantes';
 
-function getToken() {
-    return localStorage.getItem('accessToken');
+
+const consultarTodos = async () => {
+    const tokenData = await obtenerTokenFacade();
+    const token = tokenData.accessToken;
+    console.log("Token en matriculaClient:", token);
+    const data = await axios.get(BaseUrl, { headers: { Authorization: `Bearer ${token}` } });
+    return data.data;
 }
 
 
-const consultarTodos = async() => {
-    const data = axios.get(`${URL}`, {headers: {Authorization: `Bearer ${getToken()}`}}).then(r=>r.data);
-    return data;
+const consultarPorId = async (id) => {
+    const tokenData = await obtenerTokenFacade();
+    const token = tokenData.accessToken;
+    const data = await axios.get(`${BaseUrl}/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    return data.data;
 }
 
 
-const consultarPorId =  async(id) => {
-    const data = axios.get(`${URL}/${id}`, {headers: {Authorization: `Bearer ${getToken()}`}}).then(r=>r.data);
-    return data;
+const guardar = async (body) => {
+    const tokenData = await obtenerTokenFacade();
+    const token = tokenData.accessToken;
+    const response = await axios.post(`${BaseUrl}`, body, { headers: { Authorization: `Bearer ${token}` } });
+    return response.data;
 }
 
 
-const guardar =  async(body) => {
-    const response = await axios.post(`${URL}`, body, {headers: {Authorization: `Bearer ${getToken()}`}}).then(r=>r.data);
-    return response;
+const actualizar = async (id, body) => {
+    const tokenData = await obtenerTokenFacade();
+    const token = tokenData.accessToken;
+    const response = await axios.put(`${BaseUrl}/${id}`, body, { headers: { Authorization: `Bearer ${token}` } });
+    return response.data;
 }
 
 
-const actualizar =  async(id, body) => {
-    const response = await axios.put(`${URL}/${id}`, body, {headers: {Authorization: `Bearer ${getToken()}`}}).then(r=>r.data);
-    return response;
+const actualizarParcial = async (id, body) => {
+    const tokenData = await obtenerTokenFacade();
+    const token = tokenData.accessToken;
+    const response = await axios.patch(`${BaseUrl}/${id}`, body, { headers: { Authorization: `Bearer ${token}` } });
+    return response.data;
 }
 
 
-const actualizarParcial =  async(id, body) => {
-    const response = await axios.patch(`${URL}/${id}`, body, {headers: {Authorization: `Bearer ${getToken()}`}}).then(r=>r.data);
-    return response;
-}
-
-
-const borrar =  async(id) => {
-    axios.delete(`${URL}/${id}`, {headers: {Authorization: `Bearer ${getToken()}`}}).then(r=>r.data);
+const borrar = async (id) => {
+    const tokenData = await obtenerTokenFacade();
+    const token = tokenData.accessToken;
+    await axios.delete(`${BaseUrl}/${id}`, { headers: { Authorization: `Bearer ${token}` } });
 }
 
 

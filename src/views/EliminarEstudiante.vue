@@ -10,6 +10,7 @@
 <script>
 import { borrarFachada } from '../clients/MatriculaClient';
 export default {
+  inject: ['getToken'],
   data() {
     return {
       id: '',

@@ -20,6 +20,7 @@
 <script>
 import { consultarPorIdFachada } from '../clients/MatriculaClient';
 export default {
+  inject: ['getToken'],
   data() {
     return {
       id: '',

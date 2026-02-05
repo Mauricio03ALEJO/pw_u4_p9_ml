@@ -1,6 +1,15 @@
+
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { provide } from 'vue'
+import { obtenerTokenFacade } from './clients/AuthClient'
+
+// Provee getToken a toda la app
+provide('getToken', async () => {
+  const tokenData = await obtenerTokenFacade()
+  return tokenData.accessToken
+})
 </script>
 
 <template>

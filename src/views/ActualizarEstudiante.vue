@@ -15,6 +15,7 @@
 <script>
 import { actualizarFachada } from '../clients/MatriculaClient';
 export default {
+  inject: ['getToken'],
   data() {
     return {
       id: '',

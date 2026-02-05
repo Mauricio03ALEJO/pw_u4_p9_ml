@@ -31,6 +31,7 @@
 <script>
 import { consultarTodosFachada } from '../clients/MatriculaClient';
 export default {
+  inject: ['getToken'],
   data() {
     return {
       estudiantes: [],
