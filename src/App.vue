@@ -5,9 +5,9 @@ import HelloWorld from './components/HelloWorld.vue'
 import { provide } from 'vue'
 import { obtenerTokenFacade } from './clients/AuthClient'
 
-// Provee getToken a toda la app
-provide('getToken', async () => {
-  const tokenData = await obtenerTokenFacade()
+// Provee getToken a toda la app, ahora acepta usuario y password
+provide('getToken', async (usuario, password) => {
+  const tokenData = await obtenerTokenFacade(usuario, password)
   return tokenData.accessToken
 })
 </script>

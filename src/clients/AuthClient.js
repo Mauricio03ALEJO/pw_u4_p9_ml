@@ -1,12 +1,12 @@
 import axios from 'axios';
-const user = "admin";
-const password = "admin123";
 
-export const obtenerToken = async () => {
-    const response = await axios.get(`http://localhost:8082/auth/token?usuario=${user}&password=${password}`);
+// Ahora obtenerToken recibe usuario y password como argumentos
+export const obtenerToken = async (usuario, password) => {
+    const response = await axios.get(`http://localhost:8082/auth/token?usuario=${usuario}&password=${password}`);
     return response.data;
 }
 
-export const obtenerTokenFacade = async () => {
-    return await obtenerToken();
+// obtenerTokenFacade también acepta usuario y password
+export const obtenerTokenFacade = async (usuario, password) => {
+    return await obtenerToken(usuario, password);
 }

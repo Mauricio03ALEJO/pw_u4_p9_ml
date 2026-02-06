@@ -4,32 +4,36 @@
         <input v-model="usuario" type="text" placeholder="Usuario">
         <input v-model="password" type="password" placeholder="Contraseña">
         <button type="submit" @click="login">Entrar</button>
+        <div v-if="error" class="error-message">{{ error }}</div>
     </div>
 </template>
 
 <script>
-import { obtenerToken } from '../clients/AuthClient';
+import { obtenerTokenFacade } from '../clients/AuthClient';
 export default {
     data(){
         return{
             usuario: '', 
             password: '', 
+            error: ''
         };
     },
     methods: {
         async login(){
+            this.error = '';
             try {
                 // Llama a la API usando los valores del formulario
-                const response = await obtenerToken(this.usuario, this.password);
+                const response = await obtenerTokenFacade(this.usuario, this.password);
                 const TOKEN = response.accessToken || response.token || null;
                 if(TOKEN){
                     localStorage.setItem('token', TOKEN);
                     localStorage.setItem('estaAutenticado', true);
+                    this.error = '';
                 } else {
-                    console.log('Error de autenticación');
+                    this.error = 'Usuario o contraseña incorrectos.';
                 }
             } catch (error) {
-                console.log('Error de autenticación', error);
+                this.error = 'Usuario o contraseña incorrectos.';
             }
         }
     }
@@ -58,5 +62,13 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+ .error-message {
+    color: #fff;
+    background: #e74c3c;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
 }
 </style>
